@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=1788786923" />
-  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=1788786923" />
-  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=1788786923" />
+  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=1788787142" />
+  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=1788787142" />
+  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=1788787142" />
 </picture>
 
 <p align="center">
@@ -104,12 +104,12 @@ System design at scale, clean/hexagonal architecture, monorepos (Turborepo/Nx), 
 ## Activity
 
 <p align="center">
-  <img height="195" src="stats-card.svg?v=1788786923" alt="GitHub stats" />
-  <img height="195" src="langs-card.svg?v=1788786923" alt="Most used languages" />
+  <img height="195" src="stats-card.svg?v=1788787142" alt="GitHub stats" />
+  <img height="195" src="langs-card.svg?v=1788787142" alt="Most used languages" />
 </p>
 
 <p align="center">
-  <img src="streak-card.svg?v=1788786923" alt="Contribution streak" />
+  <img src="streak-card.svg?v=1788787142" alt="Contribution streak" />
 </p>
 
 <picture>

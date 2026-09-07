@@ -2,20 +2,14 @@
   <rect x="0.5" y="0.5" width="494" height="194" rx="10" fill="#0d1117" stroke="#30363d"/>
   <text x="25" y="34" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="18" font-weight="700" fill="#c9d1d9">Harshit Saini's GitHub Stats</text>
   
-  <text x="25" y="58" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Stars Earned:</text>
-  <text x="440" y="58" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1</text>
-  <text x="25" y="85" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Commits:</text>
-  <text x="440" y="85" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1,510</text>
-  <text x="25" y="112" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total PRs:</text>
-  <text x="440" y="112" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">94</text>
-  <text x="25" y="139" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Issues:</text>
-  <text x="440" y="139" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">0</text>
-  <text x="25" y="166" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Contributed to (last year):</text>
-  <text x="440" y="166" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1</text>
-  <g transform="translate(455,97)">
-    <circle r="34" fill="none" stroke="#30363d" stroke-width="6"/>
-    <circle r="34" fill="none" stroke="#58a6ff" stroke-width="6" stroke-linecap="round"
-      stroke-dasharray="27.8 213.6" transform="rotate(-90)"/>
-    <text text-anchor="middle" dy="5" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="15" font-weight="700" fill="#c9d1d9">4d</text>
-  </g>
+  <text x="25" y="60" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Stars Earned:</text>
+  <text x="470" y="60" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1</text>
+  <text x="25" y="88" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Commits:</text>
+  <text x="470" y="88" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1,512</text>
+  <text x="25" y="116" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total PRs:</text>
+  <text x="470" y="116" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">94</text>
+  <text x="25" y="144" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Issues:</text>
+  <text x="470" y="144" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">0</text>
+  <text x="25" y="172" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Contributed to (last year):</text>
+  <text x="470" y="172" text-anchor="end" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="600" fill="#c9d1d9">1</text>
 </svg>

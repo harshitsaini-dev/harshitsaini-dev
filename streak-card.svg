@@ -3,8 +3,8 @@
   <line x1="171.25" y1="40" x2="171.25" y2="160" stroke="#30363d"/>
   <line x1="323.75" y1="40" x2="323.75" y2="160" stroke="#30363d"/>
 
-  <text x="95" y="100" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Sep 7 &#8211; Present</text>
-  <text x="95" y="130" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="34" font-weight="700" fill="#c9d1d9">1,611</text>
+  <text x="95" y="100" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Sep 7, 2025 &#8211; Sep 7, 2026</text>
+  <text x="95" y="130" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="34" font-weight="700" fill="#c9d1d9">1,613</text>
   <text x="95" y="152" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Total Contributions</text>
 
   
@@ -15,7 +15,7 @@
   <text x="247.5" y="130" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="34" font-weight="700" fill="#f0883e">4</text>
   <text x="247.5" y="152" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" font-weight="700" fill="#f0883e">Current Streak</text>
 
-  <text x="400" y="100" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Sep 7 &#8211; Sep 7</text>
+  <text x="400" y="100" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Aug 5, 2026 &#8211; Aug 17, 2026</text>
   <text x="400" y="130" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="34" font-weight="700" fill="#c9d1d9">13</text>
   <text x="400" y="152" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="13" fill="#8b949e">Longest Streak</text>
 </svg>
