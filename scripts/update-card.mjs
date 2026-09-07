@@ -325,14 +325,15 @@ async function main() {
 
   // ---- streak-card.svg ----
   {
-    const W = 820, H = 220;
-    const cx1 = W * 0.18, cx2 = W / 2, cx3 = W - W * 0.18, cy = 118;
+    const W = 820, H = 240;
+    const cx1 = W * 0.18, cx2 = W / 2, cx3 = W - W * 0.18;
+    const dateY = 44, numY = 150, labelY = 180;
     const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—");
     const firstDay = days[0]?.date;
     const todayLabel = fmtDate(days[days.length - 1]?.date);
 
     const flame = `
-    <g transform="translate(${cx2},56)">
+    <g transform="translate(${cx2},70)">
       <circle r="38" fill="none" stroke="#f0883e" stroke-width="2" opacity="0.5"/>
       <path d="M0 -18 C 8 -8 10 0 5 8 C 10 4 13 -3 10 -10 C 15 -4 17 5 10 13 C 5 18 -5 18 -10 13 C -17 6 -15 -4 -9 -11 C -10 -5 -8 -1 -4 -4 C -4 -10 -3 -15 0 -18 Z" fill="#f0883e"/>
     </g>`;
@@ -342,17 +343,17 @@ async function main() {
   <line x1="${(cx1 + cx2) / 2}" y1="30" x2="${(cx1 + cx2) / 2}" y2="${H - 30}" stroke="#30363d"/>
   <line x1="${(cx2 + cx3) / 2}" y1="30" x2="${(cx2 + cx3) / 2}" y2="${H - 30}" stroke="#30363d"/>
 
-  <text x="${cx1}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; ${todayLabel}</text>
-  <text x="${cx1}" y="${cy + 38}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#c9d1d9">${fmt(cal.contributionCalendar.totalContributions)}</text>
-  <text x="${cx1}" y="${cy + 62}" text-anchor="middle" font-family="${SANS}" font-size="14" fill="#8b949e">Total Contributions</text>
+  <text x="${cx1}" y="${dateY}" text-anchor="middle" font-family="${SANS}" font-size="12" fill="#8b949e">${fmtDate(firstDay)} &#8211; ${todayLabel}</text>
+  <text x="${cx1}" y="${numY}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#c9d1d9">${fmt(cal.contributionCalendar.totalContributions)}</text>
+  <text x="${cx1}" y="${labelY}" text-anchor="middle" font-family="${SANS}" font-size="14" fill="#8b949e">Total Contributions</text>
 
   ${flame}
-  <text x="${cx2}" y="${cy + 38}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#f0883e">${currentStreak}</text>
-  <text x="${cx2}" y="${cy + 62}" text-anchor="middle" font-family="${SANS}" font-size="14" font-weight="700" fill="#f0883e">Current Streak</text>
+  <text x="${cx2}" y="${numY}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#f0883e">${currentStreak}</text>
+  <text x="${cx2}" y="${labelY}" text-anchor="middle" font-family="${SANS}" font-size="14" font-weight="700" fill="#f0883e">Current Streak</text>
 
-  <text x="${cx3}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${longestStreak > 0 ? `${fmtDate(longestStart)} &#8211; ${fmtDate(longestEnd)}` : "—"}</text>
-  <text x="${cx3}" y="${cy + 38}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#c9d1d9">${longestStreak}</text>
-  <text x="${cx3}" y="${cy + 62}" text-anchor="middle" font-family="${SANS}" font-size="14" fill="#8b949e">Longest Streak</text>
+  <text x="${cx3}" y="${dateY}" text-anchor="middle" font-family="${SANS}" font-size="12" fill="#8b949e">${longestStreak > 0 ? `${fmtDate(longestStart)} &#8211; ${fmtDate(longestEnd)}` : "—"}</text>
+  <text x="${cx3}" y="${numY}" text-anchor="middle" font-family="${SANS}" font-size="40" font-weight="700" fill="#c9d1d9">${longestStreak}</text>
+  <text x="${cx3}" y="${labelY}" text-anchor="middle" font-family="${SANS}" font-size="14" fill="#8b949e">Longest Streak</text>
 </svg>
 `;
     writeFileSync("streak-card.svg", svg);
