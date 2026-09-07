@@ -110,7 +110,7 @@ System design at scale, clean/hexagonal architecture, monorepos (Turborepo/Nx), 
 </p>
 
 <p align="center">
-  <img src="streak-card.svg?v=1788787142" alt="Contribution streak" />
+  <img src="streak-card.svg?v=1788787142" alt="Contribution streak" width="820" />
 </p>
 
 <picture>
