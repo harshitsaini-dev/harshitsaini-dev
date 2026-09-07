@@ -99,6 +99,7 @@ Full-stack dev based in Delhi. I build web products and the tools that manage th
 ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=white)
 
 **Practices & architecture**
+
 System design at scale, clean/hexagonal architecture, monorepos (Turborepo/Nx), OWASP-minded security, performance & caching, and writing docs people actually read.
 
 ## Activity
