@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg" />
-  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg" />
+  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=0" />
+  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=0" />
+  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=0" />
 </picture>
 
 <p align="center">
@@ -106,9 +106,11 @@ Beyond the tools: system design at scale, clean/hexagonal architecture, monorepo
   <img src="https://activity-graph.vercel.app/graph?username=harshitsaini-dev&theme=react-dark&hide_border=true&area=true" alt="Contribution activity" width="100%" />
 </p>
 
-<p align="center">
-  <img src="snake.svg" alt="A snake eating through my contribution graph" width="100%" />
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/harshitsaini-dev/harshitsaini-dev/output/snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/harshitsaini-dev/harshitsaini-dev/output/snake.svg" />
+  <img src="https://raw.githubusercontent.com/harshitsaini-dev/harshitsaini-dev/output/snake-dark.svg" alt="A snake eating through my contribution graph" width="100%" />
+</picture>
 
 <p align="center">
   <img height="165" src="https://github-readme-stats.shion.dev/api?username=harshitsaini-dev&theme=dark&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub stats" />

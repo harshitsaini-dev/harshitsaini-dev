@@ -31,7 +31,9 @@ jobs:
             echo "No stat changes, nothing to commit."
             exit 0
           fi
-          git add dark_mode.svg light_mode.svg
+          # bust GitHub's image cache so the profile page picks up the new svg
+          sed -i "s/\(dark_mode\.svg?v=\|light_mode\.svg?v=\)[0-9]*/\1$(date +%s)/g" README.md
+          git add dark_mode.svg light_mode.svg README.md
           git commit -m "chore: refresh profile card stats"
           git fetch origin main
           git rebase origin/main
