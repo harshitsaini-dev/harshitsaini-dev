@@ -30,4 +30,6 @@ jobs:
           fi
           git add snake.svg
           git commit -m "chore: refresh snake animation"
+          git fetch origin main
+          git rebase origin/main
           git push
