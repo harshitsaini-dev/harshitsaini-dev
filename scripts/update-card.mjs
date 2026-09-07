@@ -242,15 +242,22 @@ async function main() {
 
   // streak: walk the daily contribution calendar chronologically
   const days = weeks.flatMap((w) => w.contributionDays).map((d) => ({ date: d.date, count: d.contributionCount }));
-  let longestStreak = 0, run = 0;
+  let longestStreak = 0, longestStart = null, longestEnd = null;
+  let run = 0, runStart = null;
   for (const d of days) {
-    if (d.count > 0) { run++; longestStreak = Math.max(longestStreak, run); } else { run = 0; }
+    if (d.count > 0) {
+      if (run === 0) runStart = d.date;
+      run++;
+      if (run > longestStreak) { longestStreak = run; longestStart = runStart; longestEnd = d.date; }
+    } else {
+      run = 0;
+    }
   }
-  let currentStreak = 0;
+  let currentStreak = 0, currentStart = null;
   {
     let i = days.length - 1;
     if (days[i] && days[i].count === 0) i--; // today may not be over yet
-    while (i >= 0 && days[i].count > 0) { currentStreak++; i--; }
+    while (i >= 0 && days[i].count > 0) { currentStreak++; currentStart = days[i].date; i--; }
   }
 
   const SANS = "'Segoe UI', Ubuntu, Sans-Serif";
@@ -265,14 +272,11 @@ async function main() {
       ["Total Issues", fmt(user.issues.totalCount)],
       ["Contributed to (last year)", fmt(user.repositoriesContributedTo.totalCount)],
     ];
-    const ringPct = Math.min(100, Math.round((currentStreak / 30) * 100));
-    const r = 34, c = 2 * Math.PI * r;
-    const dash = (ringPct / 100) * c;
     const rowsSvg = rows
       .map(
         ([label, value], i) => `
-  <text x="25" y="${58 + i * 27}" font-family="${SANS}" font-size="14" fill="#8b949e">${escapeXml(label)}:</text>
-  <text x="440" y="${58 + i * 27}" text-anchor="end" font-family="${SANS}" font-size="14" font-weight="600" fill="#c9d1d9">${escapeXml(value)}</text>`
+  <text x="25" y="${60 + i * 28}" font-family="${SANS}" font-size="14" fill="#8b949e">${escapeXml(label)}:</text>
+  <text x="${W - 25}" y="${60 + i * 28}" text-anchor="end" font-family="${SANS}" font-size="14" font-weight="600" fill="#c9d1d9">${escapeXml(value)}</text>`
       )
       .join("");
 
@@ -280,12 +284,6 @@ async function main() {
   <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
   <text x="25" y="34" font-family="${SANS}" font-size="18" font-weight="700" fill="#c9d1d9">Harshit Saini's GitHub Stats</text>
   ${rowsSvg}
-  <g transform="translate(455,97)">
-    <circle r="${r}" fill="none" stroke="#30363d" stroke-width="6"/>
-    <circle r="${r}" fill="none" stroke="#58a6ff" stroke-width="6" stroke-linecap="round"
-      stroke-dasharray="${dash.toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90)"/>
-    <text text-anchor="middle" dy="5" font-family="${SANS}" font-size="15" font-weight="700" fill="#c9d1d9">${currentStreak}d</text>
-  </g>
 </svg>
 `;
     writeFileSync("stats-card.svg", svg);
@@ -329,8 +327,9 @@ async function main() {
   {
     const W = 495, H = 195;
     const cx1 = 95, cx2 = W / 2, cx3 = W - 95, cy = 100;
-    const fmtDate = (d) => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" });
-    const firstDay = days[0]?.date, lastDay = days[days.length - 1]?.date;
+    const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—");
+    const firstDay = days[0]?.date;
+    const todayLabel = fmtDate(days[days.length - 1]?.date);
 
     const flame = `
     <g transform="translate(${cx2},44)">
@@ -343,7 +342,7 @@ async function main() {
   <line x1="${(cx1 + cx2) / 2}" y1="40" x2="${(cx1 + cx2) / 2}" y2="160" stroke="#30363d"/>
   <line x1="${(cx2 + cx3) / 2}" y1="40" x2="${(cx2 + cx3) / 2}" y2="160" stroke="#30363d"/>
 
-  <text x="${cx1}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; Present</text>
+  <text x="${cx1}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; ${todayLabel}</text>
   <text x="${cx1}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#c9d1d9">${fmt(cal.contributionCalendar.totalContributions)}</text>
   <text x="${cx1}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">Total Contributions</text>
 
@@ -351,7 +350,7 @@ async function main() {
   <text x="${cx2}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#f0883e">${currentStreak}</text>
   <text x="${cx2}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#f0883e">Current Streak</text>
 
-  <text x="${cx3}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; ${fmtDate(lastDay)}</text>
+  <text x="${cx3}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${longestStreak > 0 ? `${fmtDate(longestStart)} &#8211; ${fmtDate(longestEnd)}` : "—"}</text>
   <text x="${cx3}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#c9d1d9">${longestStreak}</text>
   <text x="${cx3}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">Longest Streak</text>
 </svg>
