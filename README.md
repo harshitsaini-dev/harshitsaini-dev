@@ -107,6 +107,10 @@ Beyond the tools: system design at scale, clean/hexagonal architecture, monorepo
 </p>
 
 <p align="center">
+  <img src="snake.svg" alt="A snake eating through my contribution graph" width="100%" />
+</p>
+
+<p align="center">
   <img height="165" src="https://github-readme-stats.shion.dev/api?username=harshitsaini-dev&theme=dark&hide_border=true&include_all_commits=true&count_private=true" alt="GitHub stats" />
   <img height="165" src="https://github-readme-stats.shion.dev/api/top-langs/?username=harshitsaini-dev&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact" alt="Top languages" />
 </p>
