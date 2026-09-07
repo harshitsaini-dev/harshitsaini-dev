@@ -253,27 +253,49 @@ async function main() {
     while (i >= 0 && days[i].count > 0) { currentStreak++; i--; }
   }
 
-  const W = 1120, H = 250, PAD = 28;
-  const statRows = [
-    ["Stars", fmt(stars)],
-    ["Followers", fmt(user.followers.totalCount)],
-    ["Lifetime commits", fmt(lifetimeCommits)],
-    ["Pull requests", fmt(user.pullRequests.totalCount)],
-    ["Issues", fmt(user.issues.totalCount)],
-  ];
+  const SANS = "'Segoe UI', Ubuntu, Sans-Serif";
 
-  function statLines() {
-    return statRows
-      .map(([label, value], i) => {
-        const y = 70 + i * 30;
-        const dots = ".".repeat(Math.max(3, 28 - label.length));
-        return `<text x="${PAD}" y="${y}" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="14"><tspan fill="#ffa657">${escapeXml(label)}</tspan><tspan fill="#484f58"> ${dots} </tspan><tspan fill="#79c0ff">${escapeXml(value)}</tspan></text>`;
-      })
-      .join("\n  ");
+  // ---- stats-card.svg (mirrors the classic "github-readme-stats" card) ----
+  {
+    const W = 495, H = 195;
+    const rows = [
+      ["Total Stars Earned", fmt(stars)],
+      ["Total Commits", fmt(lifetimeCommits)],
+      ["Total PRs", fmt(user.pullRequests.totalCount)],
+      ["Total Issues", fmt(user.issues.totalCount)],
+      ["Contributed to (last year)", fmt(user.repositoriesContributedTo.totalCount)],
+    ];
+    const ringPct = Math.min(100, Math.round((currentStreak / 30) * 100));
+    const r = 34, c = 2 * Math.PI * r;
+    const dash = (ringPct / 100) * c;
+    const rowsSvg = rows
+      .map(
+        ([label, value], i) => `
+  <text x="25" y="${58 + i * 27}" font-family="${SANS}" font-size="14" fill="#8b949e">${escapeXml(label)}:</text>
+  <text x="440" y="${58 + i * 27}" text-anchor="end" font-family="${SANS}" font-size="14" font-weight="600" fill="#c9d1d9">${escapeXml(value)}</text>`
+      )
+      .join("");
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Harshit Saini's GitHub stats">
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="25" y="34" font-family="${SANS}" font-size="18" font-weight="700" fill="#c9d1d9">Harshit Saini's GitHub Stats</text>
+  ${rowsSvg}
+  <g transform="translate(455,97)">
+    <circle r="${r}" fill="none" stroke="#30363d" stroke-width="6"/>
+    <circle r="${r}" fill="none" stroke="#58a6ff" stroke-width="6" stroke-linecap="round"
+      stroke-dasharray="${dash.toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90)"/>
+    <text text-anchor="middle" dy="5" font-family="${SANS}" font-size="15" font-weight="700" fill="#c9d1d9">${currentStreak}d</text>
+  </g>
+</svg>
+`;
+    writeFileSync("stats-card.svg", svg);
+    console.log("updated stats-card.svg");
   }
 
-  function langBar() {
-    const barX = 400, barY = 70, barW = 330, barH = 10;
+  // ---- langs-card.svg ----
+  {
+    const W = 300, H = 195;
+    const barX = 25, barY = 60, barW = W - 50, barH = 10;
     let x = barX;
     const segs = langList
       .map((l) => {
@@ -282,40 +304,61 @@ async function main() {
         x += w;
         return rect;
       })
-      .join("\n    ");
+      .join("");
     const legend = langList
       .map((l, i) => {
-        const col = i % 2;
-        const row = Math.floor(i / 2);
-        const lx = barX + col * 165;
-        const ly = barY + 34 + row * 24;
-        return `<circle cx="${lx}" cy="${ly - 4}" r="4" fill="${l.color}"/><text x="${lx + 12}" y="${ly}" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="12" fill="#c9d1d9">${escapeXml(l.name)} ${l.pct.toFixed(1)}%</text>`;
+        const col = i % 2, row = Math.floor(i / 2);
+        const lx = barX + col * 140, ly = barY + 34 + row * 26;
+        return `<circle cx="${lx}" cy="${ly - 4}" r="5" fill="${l.color}"/><text x="${lx + 12}" y="${ly}" font-family="${SANS}" font-size="13" fill="#c9d1d9">${escapeXml(l.name)} ${l.pct.toFixed(1)}%</text>`;
       })
-      .join("\n    ");
-    return `<rect x="${barX}" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#161b22"/>\n    ${segs}\n    ${legend}`;
-  }
+      .join("");
 
-  function streakBlock() {
-    const cx1 = 800, cx2 = 930, cx3 = 1060;
-    const cy = 130;
-    const big = (x, value, label) => `
-    <text x="${x}" y="${cy}" text-anchor="middle" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="30" font-weight="700" fill="#c9d1d9">${escapeXml(value)}</text>
-    <text x="${x}" y="${cy + 22}" text-anchor="middle" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="12" fill="#8b949e">${escapeXml(label)}</text>`;
-    return `${big(cx1, fmt(cal.contributionCalendar.totalContributions), "contributions (12mo)")}${big(cx2, String(currentStreak), "current streak")}${big(cx3, String(longestStreak), "longest streak")}`;
-  }
-
-  const activityCard = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Live GitHub activity stats">
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="8" fill="#0d1117" stroke="#30363d"/>
-  <text x="${PAD}" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Stats </tspan><tspan fill="#3d444d">──────</tspan></text>
-  <text x="400" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Languages </tspan><tspan fill="#3d444d">──────</tspan></text>
-  <text x="740" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Last 12 months </tspan><tspan fill="#3d444d">──────</tspan></text>
-  ${statLines()}
-  ${langBar()}
-  ${streakBlock()}
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Most used languages">
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="25" y="34" font-family="${SANS}" font-size="18" font-weight="700" fill="#c9d1d9">Most Used Languages</text>
+  <rect x="${barX}" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#161b22"/>
+  ${segs}
+  ${legend}
 </svg>
 `;
-  writeFileSync("activity-card.svg", activityCard);
-  console.log("updated activity-card.svg");
+    writeFileSync("langs-card.svg", svg);
+    console.log("updated langs-card.svg");
+  }
+
+  // ---- streak-card.svg ----
+  {
+    const W = 495, H = 195;
+    const cx1 = 95, cx2 = W / 2, cx3 = W - 95, cy = 100;
+    const fmtDate = (d) => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const firstDay = days[0]?.date, lastDay = days[days.length - 1]?.date;
+
+    const flame = `
+    <g transform="translate(${cx2},44)">
+      <circle r="30" fill="none" stroke="#f0883e" stroke-width="2" opacity="0.5"/>
+      <path d="M0 -14 C 6 -6 8 0 4 6 C 8 3 10 -2 8 -8 C 12 -3 13 4 8 10 C 4 14 -4 14 -8 10 C -13 5 -12 -3 -7 -9 C -8 -4 -6 -1 -3 -3 C -3 -8 -2 -12 0 -14 Z" fill="#f0883e"/>
+    </g>`;
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Contribution streak">
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <line x1="${(cx1 + cx2) / 2}" y1="40" x2="${(cx1 + cx2) / 2}" y2="160" stroke="#30363d"/>
+  <line x1="${(cx2 + cx3) / 2}" y1="40" x2="${(cx2 + cx3) / 2}" y2="160" stroke="#30363d"/>
+
+  <text x="${cx1}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; Present</text>
+  <text x="${cx1}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#c9d1d9">${fmt(cal.contributionCalendar.totalContributions)}</text>
+  <text x="${cx1}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">Total Contributions</text>
+
+  ${flame}
+  <text x="${cx2}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#f0883e">${currentStreak}</text>
+  <text x="${cx2}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#f0883e">Current Streak</text>
+
+  <text x="${cx3}" y="${cy}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">${fmtDate(firstDay)} &#8211; ${fmtDate(lastDay)}</text>
+  <text x="${cx3}" y="${cy + 30}" text-anchor="middle" font-family="${SANS}" font-size="34" font-weight="700" fill="#c9d1d9">${longestStreak}</text>
+  <text x="${cx3}" y="${cy + 52}" text-anchor="middle" font-family="${SANS}" font-size="13" fill="#8b949e">Longest Streak</text>
+</svg>
+`;
+    writeFileSync("streak-card.svg", svg);
+    console.log("updated streak-card.svg");
+  }
 }
 
 main().catch((err) => {

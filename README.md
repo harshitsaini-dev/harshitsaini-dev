@@ -103,7 +103,12 @@ Beyond the tools: system design at scale, clean/hexagonal architecture, monorepo
 ## Activity
 
 <p align="center">
-  <img src="activity-card.svg?v=1788786619" alt="Live GitHub activity: stats, languages, streak" width="100%" />
+  <img height="195" src="stats-card.svg?v=0" alt="GitHub stats" />
+  <img height="195" src="langs-card.svg?v=0" alt="Most used languages" />
+</p>
+
+<p align="center">
+  <img src="streak-card.svg?v=0" alt="Contribution streak" />
 </p>
 
 <picture>
