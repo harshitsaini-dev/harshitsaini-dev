@@ -220,6 +220,102 @@ async function main() {
     writeFileSync(file, svg);
     console.log(`updated ${file}`);
   }
+
+  // ---- self-hosted replacement for the third-party stats/langs/streak widgets ----
+
+  const LANG_COLORS = {
+    TypeScript: "#3178c6", JavaScript: "#f1e05a", Python: "#3572A5", HTML: "#e34c26",
+    CSS: "#563d7c", Java: "#b07219", "C++": "#f34b7d", C: "#555555", Shell: "#89e051",
+    PowerShell: "#012456", PLpgSQL: "#336790", Vue: "#41b883", Go: "#00ADD8",
+    Rust: "#dea584", Dockerfile: "#384d54", SCSS: "#c6538c", EJS: "#a91e50",
+  };
+  const FALLBACK_COLORS = ["#58a6ff", "#79c0ff", "#39d353", "#f85149", "#d2a8ff", "#ffa657"];
+
+  const langList = [...langSizes.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([name, size], i) => ({
+      name,
+      pct: (size / totalLangSize) * 100,
+      color: LANG_COLORS[name] || FALLBACK_COLORS[i % FALLBACK_COLORS.length],
+    }));
+
+  // streak: walk the daily contribution calendar chronologically
+  const days = weeks.flatMap((w) => w.contributionDays).map((d) => ({ date: d.date, count: d.contributionCount }));
+  let longestStreak = 0, run = 0;
+  for (const d of days) {
+    if (d.count > 0) { run++; longestStreak = Math.max(longestStreak, run); } else { run = 0; }
+  }
+  let currentStreak = 0;
+  {
+    let i = days.length - 1;
+    if (days[i] && days[i].count === 0) i--; // today may not be over yet
+    while (i >= 0 && days[i].count > 0) { currentStreak++; i--; }
+  }
+
+  const W = 1120, H = 250, PAD = 28;
+  const statRows = [
+    ["Stars", fmt(stars)],
+    ["Followers", fmt(user.followers.totalCount)],
+    ["Lifetime commits", fmt(lifetimeCommits)],
+    ["Pull requests", fmt(user.pullRequests.totalCount)],
+    ["Issues", fmt(user.issues.totalCount)],
+  ];
+
+  function statLines() {
+    return statRows
+      .map(([label, value], i) => {
+        const y = 70 + i * 30;
+        const dots = ".".repeat(Math.max(3, 28 - label.length));
+        return `<text x="${PAD}" y="${y}" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="14"><tspan fill="#ffa657">${escapeXml(label)}</tspan><tspan fill="#484f58"> ${dots} </tspan><tspan fill="#79c0ff">${escapeXml(value)}</tspan></text>`;
+      })
+      .join("\n  ");
+  }
+
+  function langBar() {
+    const barX = 400, barY = 70, barW = 330, barH = 10;
+    let x = barX;
+    const segs = langList
+      .map((l) => {
+        const w = (l.pct / 100) * barW;
+        const rect = `<rect x="${x.toFixed(1)}" y="${barY}" width="${w.toFixed(1)}" height="${barH}" fill="${l.color}"/>`;
+        x += w;
+        return rect;
+      })
+      .join("\n    ");
+    const legend = langList
+      .map((l, i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const lx = barX + col * 165;
+        const ly = barY + 34 + row * 24;
+        return `<circle cx="${lx}" cy="${ly - 4}" r="4" fill="${l.color}"/><text x="${lx + 12}" y="${ly}" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="12" fill="#c9d1d9">${escapeXml(l.name)} ${l.pct.toFixed(1)}%</text>`;
+      })
+      .join("\n    ");
+    return `<rect x="${barX}" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#161b22"/>\n    ${segs}\n    ${legend}`;
+  }
+
+  function streakBlock() {
+    const cx1 = 800, cx2 = 930, cx3 = 1060;
+    const cy = 130;
+    const big = (x, value, label) => `
+    <text x="${x}" y="${cy}" text-anchor="middle" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="30" font-weight="700" fill="#c9d1d9">${escapeXml(value)}</text>
+    <text x="${x}" y="${cy + 22}" text-anchor="middle" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="12" fill="#8b949e">${escapeXml(label)}</text>`;
+    return `${big(cx1, fmt(cal.contributionCalendar.totalContributions), "contributions (12mo)")}${big(cx2, String(currentStreak), "current streak")}${big(cx3, String(longestStreak), "longest streak")}`;
+  }
+
+  const activityCard = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Live GitHub activity stats">
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="8" fill="#0d1117" stroke="#30363d"/>
+  <text x="${PAD}" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Stats </tspan><tspan fill="#3d444d">──────</tspan></text>
+  <text x="400" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Languages </tspan><tspan fill="#3d444d">──────</tspan></text>
+  <text x="740" y="36" font-family="'Consolas','Menlo','DejaVu Sans Mono',monospace" font-size="16"><tspan fill="#3d444d">─</tspan><tspan fill="#58a6ff"> Last 12 months </tspan><tspan fill="#3d444d">──────</tspan></text>
+  ${statLines()}
+  ${langBar()}
+  ${streakBlock()}
+</svg>
+`;
+  writeFileSync("activity-card.svg", activityCard);
+  console.log("updated activity-card.svg");
 }
 
 main().catch((err) => {
