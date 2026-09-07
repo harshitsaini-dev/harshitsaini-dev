@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=0" />
-  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=0" />
-  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=0" />
+  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=1788786619" />
+  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=1788786619" />
+  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=1788786619" />
 </picture>
 
 <p align="center">
@@ -103,7 +103,7 @@ Beyond the tools: system design at scale, clean/hexagonal architecture, monorepo
 ## Activity
 
 <p align="center">
-  <img src="activity-card.svg?v=0" alt="Live GitHub activity: stats, languages, streak" width="100%" />
+  <img src="activity-card.svg?v=1788786619" alt="Live GitHub activity: stats, languages, streak" width="100%" />
 </p>
 
 <picture>
