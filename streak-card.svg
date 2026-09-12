@@ -3,8 +3,8 @@
   <line x1="278.8" y1="30" x2="278.8" y2="210" stroke="#30363d"/>
   <line x1="541.2" y1="30" x2="541.2" y2="210" stroke="#30363d"/>
 
-  <text x="147.6" y="44" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="12" fill="#8b949e">Sep 11, 2025 &#8211; Sep 11, 2026</text>
-  <text x="147.6" y="150" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="40" font-weight="700" fill="#c9d1d9">1,685</text>
+  <text x="147.6" y="44" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="12" fill="#8b949e">Sep 12, 2025 &#8211; Sep 12, 2026</text>
+  <text x="147.6" y="150" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="40" font-weight="700" fill="#c9d1d9">1,689</text>
   <text x="147.6" y="180" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" fill="#8b949e">Total Contributions</text>
 
   
@@ -12,7 +12,7 @@
       <circle r="38" fill="none" stroke="#f0883e" stroke-width="2" opacity="0.5"/>
       <path d="M0 -18 C 8 -8 10 0 5 8 C 10 4 13 -3 10 -10 C 15 -4 17 5 10 13 C 5 18 -5 18 -10 13 C -17 6 -15 -4 -9 -11 C -10 -5 -8 -1 -4 -4 C -4 -10 -3 -15 0 -18 Z" fill="#f0883e"/>
     </g>
-  <text x="410" y="150" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="40" font-weight="700" fill="#f0883e">7</text>
+  <text x="410" y="150" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="40" font-weight="700" fill="#f0883e">9</text>
   <text x="410" y="180" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="14" font-weight="700" fill="#f0883e">Current Streak</text>
 
   <text x="672.4" y="44" text-anchor="middle" font-family="'Segoe UI', Ubuntu, Sans-Serif" font-size="12" fill="#8b949e">Aug 5, 2026 &#8211; Aug 17, 2026</text>
