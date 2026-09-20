@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=1789890210" />
-  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=1789890210" />
-  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=1789890210" />
+  <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg?v=1789892519" />
+  <source media="(prefers-color-scheme: light)" srcset="light_mode.svg?v=1789892519" />
+  <img alt="harshitsaini-dev's GitHub profile" src="dark_mode.svg?v=1789892519" />
 </picture>
 
 <p align="center">
@@ -110,12 +110,12 @@ Full-stack dev based in Delhi. I build web products and the tools that manage th
 ## Activity
 
 <p align="center">
-  <img height="195" src="stats-card.svg?v=1789890210" alt="GitHub stats" />
-  <img height="195" src="langs-card.svg?v=1789890210" alt="Most used languages" />
+  <img height="195" src="stats-card.svg?v=1789892519" alt="GitHub stats" />
+  <img height="195" src="langs-card.svg?v=1789892519" alt="Most used languages" />
 </p>
 
 <p align="center">
-  <img src="streak-card.svg?v=1789890210" alt="Contribution streak" width="820" />
+  <img src="streak-card.svg?v=1789892519" alt="Contribution streak" width="820" />
 </p>
 
 <picture>
