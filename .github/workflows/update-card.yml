@@ -36,6 +36,5 @@ jobs:
           sed -i "s/\(dark_mode\.svg?v=\|light_mode\.svg?v=\|stats-card\.svg?v=\|langs-card\.svg?v=\|streak-card\.svg?v=\)[0-9]*/\1$(date +%s)/g" README.md
           git add README.md
           git commit -m "chore: refresh profile card stats"
-          git fetch origin main
-          git rebase origin/main
+          git pull --rebase -X ours origin main
           git push
