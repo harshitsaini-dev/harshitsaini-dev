@@ -128,6 +128,4 @@ Full-stack dev based in Delhi. I build web products and the tools that manage th
 
 <p align="center">
   <a href="https://harshitsaini.in">harshitsaini.in</a> · <a href="mailto:harshitsaini.dev@gmail.com">harshitsaini.dev@gmail.com</a> · <a href="https://linkedin.com/in/harshitsaini-dev">in/harshitsaini-dev</a>
-  &nbsp;·&nbsp;
-  <img src="https://komarev.com/ghpvc/?username=harshitsaini-dev&color=3ECF8E&style=flat-square&label=views" alt="Profile views" />
 </p>
