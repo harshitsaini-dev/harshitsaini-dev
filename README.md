@@ -20,7 +20,7 @@ Full-stack dev based in Delhi. I build web products and the tools that manage th
 | **[hive](https://github.com/harshitsaini-dev/hive)** | Manage several Gmail accounts from one place — unified search, bulk cleanup, and send from any connected identity. `TypeScript` |
 | **[SpeakLink](https://github.com/harshitsaini-dev/SpeakLink)** | Live voice communication platform — audio goes from an HQ browser dashboard to store agent listeners across the estate. `Python` |
 | **[portfolio](https://github.com/harshitsaini-dev/portfolio)** | 3D portfolio site and admin CMS, built as a Next.js / pnpm monorepo with shared packages. `TypeScript` `Next.js` `Three.js` |
-| **[lovetrack](https://github.com/harshitsaini-dev/lovetrack)** | Consent-based attendance and activity verification PWA for couples and friends. `TypeScript` `PWA` |
+| **[WhatsHive](https://whatshive.harshitsaini.in)** | Multi-channel WhatsApp messaging queue with a web dashboard.`JavaScript` `TypeScript` `PWA` |
 | **[orbit](https://github.com/harshitsaini-dev/orbit)** | One workspace for every cloud drive you own — aggregates Google Drive, OneDrive, Dropbox, MEGA, pCloud and any S3-compatible bucket behind a single interface. `TypeScript` |
 | **[core](https://github.com/harshitsaini-dev/core)** | Zero-knowledge password, secret and .env manager. Client-side AES-256-GCM + Argon2id, offline-first PWA, self-hostable, free on Cloudflare. `TypeScript` |
 
